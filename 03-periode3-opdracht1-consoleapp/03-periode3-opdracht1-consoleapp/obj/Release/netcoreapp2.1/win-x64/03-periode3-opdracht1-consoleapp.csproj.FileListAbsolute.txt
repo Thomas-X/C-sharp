@@ -1,0 +1,13 @@
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\hostpolicy.dll
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\hostfxr.dll
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.exe
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.deps.json
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.runtimeconfig.json
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.runtimeconfig.dev.json
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.dll
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\bin\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.pdb
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\obj\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.csproj.CoreCompileInputs.cache
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\obj\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.AssemblyInfoInputs.cache
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\obj\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.AssemblyInfo.cs
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\obj\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.dll
+C:\gitrepos\C-sharp\03-periode3-opdracht1-consoleapp\03-periode3-opdracht1-consoleapp\obj\Release\netcoreapp2.1\win-x64\03-periode3-opdracht1-consoleapp.pdb
