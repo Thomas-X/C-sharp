@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="RandomBitMapImage.exe" version="1.0.0.0" publicKeyToken="6a5b537faa83335d" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="RandomBitMapImage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="RandomBitMapImage.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RandomBitMapImage.exe" size="92136">
+      <assemblyIdentity name="RandomBitMapImage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>SYLl/vrv/0hoVo4bCTA/6Z3EhlP0dlDr1sWJUyx87vU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="RandomBitMapImage.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-I1P3SFM\Thomas" issuerKeyHash="1cb40320c10798913d9f925f58cee7c4df90fc9c" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>I3JPwKrfP2ElBpnhFuGILyjBEyMYdGFzSru1Gm7TYuE=</DigestValue></Reference></SignedInfo><SignatureValue>13bB66fQcd8YtKL+n8t4b2itUESEkUqvtsNmjeNfdRuhi2AkJEMwsUFnLJM8kIJ9B9BJzlRcCiTQO2v9F7XhkirBJl0oOxAVDbNrUmigOoS1neNbjAksQ/SIRwOOecKOCaumNqh5yeoE0cIlBf+S1S++B18CHlgBey0EacKjViw=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>6SZzDr5wiluich9kUz3QIbtdxpEREF56u3C0imjysOAgEodw5RiBrNevcFTQK84EqXZOmZnIcvZEyAf/i7vpIbuRU2juaoL77ELpiFbe9IgQN5nSNo87k/nEt/XsXKZvDsPd+RM8N2i9SA7b5z2JejeE88HL37A+bUUpLauZDSU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="e162d36e1ab5bb4a736174182313c1282f88e116e1990625613fdfaac04f7223" Description="" Url=""><as:assemblyIdentity name="RandomBitMapImage.exe" version="1.0.0.0" publicKeyToken="6a5b537faa83335d" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-I1P3SFM\Thomas</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>yTR0C0VKQzkPOScNGn/zduIInPjRNhRAtjKLOHoQ5J0=</DigestValue></Reference></SignedInfo><SignatureValue>c9TY4dZ3YLLhy+K+elQnLoYFyfpVarxGs8LIgOBp3mYqXbb3K2Br76vpB6JaW3j54gcuEJtKs6ebIjS8wq/C4/fKD2rbk6yQJR2BZK8vTttK6f85QGy0ZzWD+qkIRVwNU+soKPTsGCfC2nlpT65ByYSd+K8R9/7J6NPPV7qD+8g=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>6SZzDr5wiluich9kUz3QIbtdxpEREF56u3C0imjysOAgEodw5RiBrNevcFTQK84EqXZOmZnIcvZEyAf/i7vpIbuRU2juaoL77ELpiFbe9IgQN5nSNo87k/nEt/XsXKZvDsPd+RM8N2i9SA7b5z2JejeE88HL37A+bUUpLauZDSU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQSmwzhk99PLVAEGXTEQ/J/zANBgkqhkiG9w0BAQsFADA3MTUwMwYDVQQDHiwARABFAFMASwBUAE8AUAAtAEkAMQBQADMAUwBGAE0AXABUAGgAbwBtAGEAczAeFw0xODEyMTExODIzNTNaFw0xOTEyMTIwMDIzNTNaMDcxNTAzBgNVBAMeLABEAEUAUwBLAFQATwBQAC0ASQAxAFAAMwBTAEYATQBcAFQAaABvAG0AYQBzMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDpJnMOvnCKW6JyH2RTPdAhu13GkREQXnq7cLSKaPKw4CASh3DlGIGs169wVNArzgSpdk6Zmchy9kTIB/+Lu+khu5FTaO5qgvvsQumIVt70iBA3mdI2jzuT+cS39excpm8Ow935Ezw3aL1IDtvnPYl6N4TzwcvfsD5tRSktq5kNJQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAC5kTuB0lrEYvFW9nnTwT/x3HZDbiVI0kpsaIFMyzyLJy2EIrI4wgB6gsg9awQYBrJncPLFHhoVfHDN/RTHODv0+CPT2++VHZq5tvyzupaKy5JmevAUpjz+akjFcCJPO89GBJL1QY2ctm6EeUCBz/IWudYpDyLwdOLBBBNIlf534</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

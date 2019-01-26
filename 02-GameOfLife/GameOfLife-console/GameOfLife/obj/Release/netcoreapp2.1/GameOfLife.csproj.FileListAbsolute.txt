@@ -1,0 +1,11 @@
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\bin\Release\netcoreapp2.1\GameOfLife.deps.json
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\bin\Release\netcoreapp2.1\GameOfLife.runtimeconfig.json
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\bin\Release\netcoreapp2.1\GameOfLife.runtimeconfig.dev.json
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\bin\Release\netcoreapp2.1\GameOfLife.dll
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\bin\Release\netcoreapp2.1\GameOfLife.pdb
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.csprojAssemblyReference.cache
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.csproj.CoreCompileInputs.cache
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.AssemblyInfoInputs.cache
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.AssemblyInfo.cs
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.dll
+C:\gitrepos\GameOfLife\GameOfLife-console\GameOfLife\obj\Release\netcoreapp2.1\GameOfLife.pdb
