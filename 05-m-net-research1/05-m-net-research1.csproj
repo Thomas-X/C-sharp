@@ -18,7 +18,7 @@
     <None Update="metrics.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ml-data.txt">
+    <None Update="ml-data-old.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="model-saved.zip">
