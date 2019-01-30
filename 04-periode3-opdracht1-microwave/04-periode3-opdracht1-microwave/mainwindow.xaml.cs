@@ -88,7 +88,7 @@ namespace _04_periode3_opdracht1_microwave
           
             // If value is changed && this.microwave.Microwaving == Constants.Microwaving.Yes // turn microwave and timer off
             
-            throw new NotImplementedException();
+//            throw new NotImplementedException();
         }
     }
 }
