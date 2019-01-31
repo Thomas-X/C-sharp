@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Microsoft.ML;
 using Microsoft.ML.Core.Data;
 using Microsoft.ML.Data;
@@ -55,7 +56,9 @@ namespace _05_m_net_research1
         private const string DataLocation = "./ml-data.txt";
         private const string MetricsLocation = "./metrics.json";
         // Max iterations the multiclass classification algorithm can do (less means less quality model, but quicker re-trains)
-        private const int maxIterations = 20;
+
+        // Switch from Int32.MaxValue to 20 or so for train times of 2-5 seconds
+        private const int maxIterations = 50000; 
         private static PredictionEngine<QuestionData, QuestionPrediction> predictor; 
 
         public class Metric
@@ -185,6 +188,8 @@ namespace _05_m_net_research1
             IDataView testData = ReadData();
             var metrics = mlContext.MulticlassClassification.Evaluate(model.Transform(testData), label: "Label");
 
+            Logger(new List<string>() { String.Format("The model is {0}% better than random guessing", metrics.LogLossReduction) });
+
             // Get existing metrics
             string savedMetrics = "[]";
 
@@ -210,6 +215,12 @@ namespace _05_m_net_research1
 
         }
 
+        public struct ScoresAndClassNames
+        {
+            public float Score;
+            public string className;
+        }
+
         static void Main(string[] args)
         {
             // Create the ML object
@@ -222,7 +233,7 @@ namespace _05_m_net_research1
             // Generate dataset from Generator
             Generator.Generate();
 
-//            // Read data from a file and load into memory
+            // Read data from a file and load into memory
             trainingData = ReadData();
 
             // See QuestionData & QuestionPrediction for more info
@@ -247,6 +258,8 @@ namespace _05_m_net_research1
 
             while (true)
             {
+                
+
                 Console.Write("Stel een vraag: ");
                 var input = Console.ReadLine();
                 var stopwatch = Stopwatch.StartNew();
@@ -254,18 +267,32 @@ namespace _05_m_net_research1
                 QuestionPrediction prediction = predictor.Predict(
                     new QuestionData(input));
 
-                List<string> classNames = new List<string>();
-
-                foreach (var qnaData in Generator.Answers)
+                List<ScoresAndClassNames> scoresAndClassNames = new List<ScoresAndClassNames>();
+                for (int i = 0; i < Generator.Answers.Count; i++)
                 {
-                    classNames.Add(qnaData.Key);
+                    scoresAndClassNames.Add(new ScoresAndClassNames()
+                    {
+                        className = Generator.Answers.ElementAt(i).Key,
+                        Score = prediction.Scores[i]
+                    });
                 }
 
+                var sortedScoresClassNames = scoresAndClassNames.OrderByDescending(s => s.Score)
+                    .Take(3)
+                    .ToList();
                 
+                Console.WriteLine(Divider);
+                Console.WriteLine("I'm {0}% sure this is correct. \n{1}", sortedScoresClassNames[0].Score * 100, Generator.Answers[sortedScoresClassNames[0].className]);
+                foreach (var sortedScoresClassName in sortedScoresClassNames)
+                {
+                    LogObject(sortedScoresClassName);
+                }
+                Console.WriteLine(Divider);
+
+
                 Console.WriteLine("PREDICTED IN: {0} tick(s) and {1} seconds", stopwatch.ElapsedTicks,
                     stopwatch.Elapsed.TotalSeconds);
-                LogObject(prediction);
-                LogObject(classNames);
+//                LogObject(classNames);
             }
         }
     }

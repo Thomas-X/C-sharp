@@ -19,15 +19,39 @@ namespace _05_m_net_research1
             {"dod", "De DoD (Definition of Done) is een lijst aan eisen waaraan ieder backlogelement moet voldoen"},
             {"feature", "Een functionele wens of eis. Meestal beschreven in de vorm van een user story"},
             {"bug", "Een fout in de software. Gedefinieerd als een afwijking van de beschreven functionaliteit."},
-            {"technisch werk", "Een beschrijving van een technische taak die moet worden uitgevoerd, maar geen directe functionele achtergrond heeft. Bijvoorbeeld het opzetten van een testomgeving, het inrichten van een database enzovoort."},
-            {"spike", "Het maken van een prototype om te onderzoeken hoe een bepaalde functionele wens of eis het best kan kan worden aangepakt"},
-            {"epic", "Een functionele wens die nog weinig in detail is uitgewerkt. Deze staat gewoonlijk onder aan de backlog en is dus nog ver in de toekomst. Naarmate een epic belangrijker wordt en dus naar boven schuift in de backlog, moet de epic worden opgesplitst in kleinere features die beter gedefinieerd."},
-            {"acceptatiecriteria", "Bij ieder backlogelement wordt door de Product Owner in samenwerking met de klant een lijst met eisen opgesteld waaraan het specifieke element moet voldoen om geaccepteerd te worden."},
-            {"user story", "Een user story is een korte beschrijving in voor ‘normale’ mensen leesbare taal, van een functionele wens. Een story beslaat maximaal drie of vier zinnen waarin kort de wens wordt beschreven."},
-            {"drie vragen user story", "Als een gebruiker met rol <X> wil ik <functionaliteit Y> om <reden Z>\r\nOmdat <reden Z> wil ik als gebruiker met rol <X>, <functionaliteit Y>\r\n"},
+            {
+                "technisch werk",
+                "Een beschrijving van een technische taak die moet worden uitgevoerd, maar geen directe functionele achtergrond heeft. Bijvoorbeeld het opzetten van een testomgeving, het inrichten van een database enzovoort."
+            },
+            {
+                "spike",
+                "Het maken van een prototype om te onderzoeken hoe een bepaalde functionele wens of eis het best kan kan worden aangepakt"
+            },
+            {
+                "epic",
+                "Een functionele wens die nog weinig in detail is uitgewerkt. Deze staat gewoonlijk onder aan de backlog en is dus nog ver in de toekomst. Naarmate een epic belangrijker wordt en dus naar boven schuift in de backlog, moet de epic worden opgesplitst in kleinere features die beter gedefinieerd."
+            },
+            {
+                "acceptatiecriteria",
+                "Bij ieder backlogelement wordt door de Product Owner in samenwerking met de klant een lijst met eisen opgesteld waaraan het specifieke element moet voldoen om geaccepteerd te worden."
+            },
+            {
+                "user story",
+                "Een user story is een korte beschrijving in voor ‘normale’ mensen leesbare taal, van een functionele wens. Een story beslaat maximaal drie of vier zinnen waarin kort de wens wordt beschreven."
+            },
+            {
+                "drie vragen user story",
+                "Als een gebruiker met rol <X> wil ik <functionaliteit Y> om <reden Z>\r\nOmdat <reden Z> wil ik als gebruiker met rol <X>, <functionaliteit Y>\r\n"
+            },
             {"velocity", "De teamsnelheid heet “velocity”."},
-            {"prioriteit", " Dit is een getal dat aangeeft welke functionaliteit voor de klant het belangrijkst is . Soms wordt ook gebruiktgemaakt van de MoSCoW-reeks (Must have, Should have, Could have, Won’t have) of alleen de prioriteiten hoog, middel en laag"},
-            {"machtsinteresse diagram", "Machtsinteresse diagram houdt in dat linksboven de genen met het meeste macht en interesse zitten en links onder de mensen met het minste macht/interesse"},
+            {
+                "prioriteit",
+                " Dit is een getal dat aangeeft welke functionaliteit voor de klant het belangrijkst is . Soms wordt ook gebruiktgemaakt van de MoSCoW-reeks (Must have, Should have, Could have, Won’t have) of alleen de prioriteiten hoog, middel en laag"
+            },
+            {
+                "machtsinteresse diagram",
+                "Machtsinteresse diagram houdt in dat linksboven de genen met het meeste macht en interesse zitten en links onder de mensen met het minste macht/interesse"
+            },
         };
 
 
@@ -68,7 +92,7 @@ namespace _05_m_net_research1
         public static List<QuestionData> GenerateQuestionsFromTerm(string term, string answer, string category)
         {
             List<QuestionData> questionDatas = new List<QuestionData>();
-            
+
             foreach (string whatQuestion in whatQuestions)
             {
                 questionDatas.Add(
@@ -80,7 +104,7 @@ namespace _05_m_net_research1
 
             return questionDatas;
         }
-        
+
         // Why? <== these are explaining questions, phrased very differently
         // TODO Why?-questions can be answered with "Omdat", in most cases
 
@@ -107,11 +131,9 @@ namespace _05_m_net_research1
         public static void Generate()
         {
             StringBuilder stringBuilder = new StringBuilder();
-
             List<QuestionData> questionDatas = MachineLearningDataSet.SelectMany(x => x).ToList();
-
-            Console.WriteLine(questionDatas.Count);
-
+            Program.Logger(new List<string>()
+                {String.Format("The total amount of questions generated is: {0}", questionDatas.Count)});
             foreach (var questionData in questionDatas)
             {
                 string[] strArr =
