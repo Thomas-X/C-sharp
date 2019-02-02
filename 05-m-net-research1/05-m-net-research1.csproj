@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="0.9.0" />
+    <PackageReference Include="OpenTextSummarizer" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

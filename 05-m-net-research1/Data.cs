@@ -20,9 +20,9 @@ namespace _05_m_net_research1
         }
 
 
-        [LoadColumn(0)] public string Question;
+        [LoadColumn(1)] public string Question;
 
-        [LoadColumn(1)] public string Label;
+        [LoadColumn(2)] public string Label;
 
     }
 
