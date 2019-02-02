@@ -1,0 +1,1 @@
+this 'dics' folder is for text summarizer when you get a file not found exception, replace it with this.
