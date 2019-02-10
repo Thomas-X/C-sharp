@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Configuration;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace _10_ws_webserver
@@ -24,7 +26,7 @@ namespace _10_ws_webserver
         private TcpListener listener;
 
         // The amount of backlog threads to keep listening for requests for
-        private int backlog = 1024;
+        private int backlog = 128;
 
 
         public Webserver(string address, int port)
@@ -38,19 +40,17 @@ namespace _10_ws_webserver
             localAddress = IPAddress.Parse(Address);
             listener = new TcpListener(localAddress, Port);
             listener.Start(backlog);
+            Console.WriteLine("Ready on port {0}", Port);
         }
 
         public void TcpClientListener()
         {
             // Perform a blocking call to accept requests.
-            // You could also user server.AcceptSocket() here.
             TcpClient client = listener.AcceptTcpClient();
-            Console.WriteLine("Connected!");
+            Console.WriteLine("Connected to an incoming connection!");
             StringBuilder stringBuilder = new StringBuilder();
-
             string content = File.ReadAllText("./public/index.html");
             
-
             stringBuilder.Append("HTTP 1.1\r\n");
             stringBuilder.Append("Server: Team-1337\r\n");
             stringBuilder.Append("Content-Type: text/html\r\n");
@@ -67,16 +67,16 @@ namespace _10_ws_webserver
             {
                 while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
-                    //                var data = Encoding.UTF8.GetString(bytes, 0, i);
-                    //                Console.WriteLine("Received: {0}", data);
+                    var data = Encoding.UTF8.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
                     stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Done writing to TCP socket {0}", Task.CurrentId);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
+            Console.WriteLine("Closing connection.. TCPSOCKETID: {0}", Task.CurrentId);
             client.Close();
         }
 
@@ -84,8 +84,7 @@ namespace _10_ws_webserver
         {
             while (true)
             {
-                Console.WriteLine("Ready on port {0}", Port);
-
+                Console.WriteLine("Refreshed thread pool");
                 // Create TCP listener pool
                 Task[] tasks = new Task[backlog];
 
@@ -94,7 +93,7 @@ namespace _10_ws_webserver
                     Task task = Task.Run(() => TcpClientListener());
                     tasks.SetValue(task, i);
                 }
-
+                // Till all tasks have completed (each "task" can handle 1 request, we have a pool of tasks based on the backlog attribute)
                 Task.WaitAll(tasks);
 
             }
