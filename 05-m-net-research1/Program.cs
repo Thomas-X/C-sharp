@@ -96,15 +96,15 @@ namespace _05_m_net_research1
         /// 1) https://i.imgur.com/uGqIuCL.png
         /// 2) https://i.imgur.com/jBebTRx.png
         /// </summary>
-        /// <returns></returns>
-        public static IDataView ReadData()
-        {
-            var reader =
-                mlContext.Data.CreateTextReader<QuestionData>(separatorChar: Generator.DatasetSeparator,
-                    hasHeader: false);
-            Logger(new List<string>() {"Reading data.."});
-            return reader.Read($"{Directory.GetCurrentDirectory()}/{DataLocation}");
-        }
+//        /// <returns></returns>
+//        public static IDataView ReadData()
+//        {
+//            var reader =
+//                mlContext.Data.CreateTextReader<QuestionData>(separatorChar: Generator.DatasetSeparator,
+//                    hasHeader: false);
+//            Logger(new List<string>() {"Reading data.."});
+//            return reader.Read($"{Directory.GetCurrentDirectory()}/{DataLocation}");
+//        }
 
         /// <summary>
         /// Created the pipeline used in the model, containing certain mappings
@@ -208,7 +208,7 @@ namespace _05_m_net_research1
         {
             // Gets the metrics from the current model
             // Possible duplicate call if not loading from existing model
-            IDataView testData = ReadData();
+//            IDataView testData = ReadData();
             var metrics = mlContext.MulticlassClassification.Evaluate(model.Transform(testData), label: "Label");
 
             Logger(new List<string>() { String.Format("The model is {0}% better than random guessing", metrics.LogLossReduction) });
@@ -280,7 +280,7 @@ namespace _05_m_net_research1
 
             
             // Create the ML object
-            mlContext = CreateMachineLearningContext();
+//            mlContext = CreateMachineLearningContext();
 
 
             for (int i = 0; i < 1; i++)
@@ -288,22 +288,22 @@ namespace _05_m_net_research1
                 // <== Comment this if loading model ==
 
 //                // Generate dataset from Generator
-//                //            Generator.Generate();
+                Generator.Generate();
 //
 //                // Read data from a file and load into memory
-                trainingData = ReadData();
+//                trainingData = ReadData();
 
                 // See QuestionData & QuestionPrediction for more info
-                pipeline = SetupPipeline();
+//                pipeline = SetupPipeline();
 
 
                 // Train from the dataset, generating a model from the training.
-                model = CreateModel();
+//                model = CreateModel();
 
-                var transformedData = model.Transform(trainingData);
+//                var transformedData = model.Transform(trainingData);
 
-                var bla = transformedData.GetColumn<string>(mlContext, "BagOfWords");
-                LogObject(bla);
+//                var bla = transformedData.GetColumn<string>(mlContext, "BagOfWords");
+//                LogObject(bla);
 
 //                new StopWor
                
@@ -311,7 +311,7 @@ namespace _05_m_net_research1
                 //            LogObject(model.Transform(trainingData));
 
                 // Saves the updated model to a .zip file for loading
-                SaveModel();
+//                SaveModel();
 //                // == End ==/>
 //
 //                // Loads the model
@@ -319,55 +319,55 @@ namespace _05_m_net_research1
 //                model = LoadModel();
 
                 // Use the model for one-time prediction
-                predictor = model.CreatePredictionEngine<QuestionData, QuestionPrediction>(mlContext);
+//                predictor = model.CreatePredictionEngine<QuestionData, QuestionPrediction>(mlContext);
 
                 // Save model metrics, to see how well it performs vs older models
-                SaveMetrics();
+//                SaveMetrics();
             }
 
 //
-            while (true)
-            {
-                
-
-                Console.Write("Stel een vraag: ");
-                var input = Console.ReadLine();
-                var stopwatch = Stopwatch.StartNew();
-                Console.WriteLine("PREDICTING..");
-                QuestionPrediction prediction = predictor.Predict(
-                    new QuestionData(input));
-
-                JObject json = (JObject) JsonConvert.DeserializeObject(File.ReadAllText($"{Directory.GetCurrentDirectory()}/../../../stack-overflow-api-client/db.json"));
-
-
-                List<ScoresAndClassNames> scoresAndClassNames = new List<ScoresAndClassNames>();
-                for (int i = 0; i < prediction.Scores.Length; i++)
-                {
-                    scoresAndClassNames.Add(new ScoresAndClassNames()
-                    {
-//                        className = Generator.Answers.ElementAt(i).Key,
-                        Score = prediction.Scores[i]
-                    });
-                }
-
-                var sortedScoresClassNames = scoresAndClassNames.OrderByDescending(s => s.Score)
-                    .Take(3)
-                    .ToList();
-                
-                Console.WriteLine(Divider);
-                Console.WriteLine("I'm {0}% sure this is correct.", sortedScoresClassNames[0].Score * 100);
-                foreach (var sortedScoresClassName in sortedScoresClassNames)
-                {
-                    LogObject(sortedScoresClassName);
-                }
-                Console.WriteLine(Divider);
-
-
-
-                Console.WriteLine("PREDICTED IN: {0} tick(s) and {1} seconds", stopwatch.ElapsedTicks,
-                    stopwatch.Elapsed.TotalSeconds);
-                LogObject(prediction.PredictedLabel);
-            }
+//            while (true)
+//            {
+//                
+//
+//                Console.Write("Stel een vraag: ");
+//                var input = Console.ReadLine();
+//                var stopwatch = Stopwatch.StartNew();
+//                Console.WriteLine("PREDICTING..");
+//                QuestionPrediction prediction = predictor.Predict(
+//                    new QuestionData(input));
+//
+//                JObject json = (JObject) JsonConvert.DeserializeObject(File.ReadAllText($"{Directory.GetCurrentDirectory()}/../../../stack-overflow-api-client/db.json"));
+//
+//
+//                List<ScoresAndClassNames> scoresAndClassNames = new List<ScoresAndClassNames>();
+//                for (int i = 0; i < prediction.Scores.Length; i++)
+//                {
+//                    scoresAndClassNames.Add(new ScoresAndClassNames()
+//                    {
+////                        className = Generator.Answers.ElementAt(i).Key,
+//                        Score = prediction.Scores[i]
+//                    });
+//                }
+//
+//                var sortedScoresClassNames = scoresAndClassNames.OrderByDescending(s => s.Score)
+//                    .Take(3)
+//                    .ToList();
+//                
+//                Console.WriteLine(Divider);
+//                Console.WriteLine("I'm {0}% sure this is correct.", sortedScoresClassNames[0].Score * 100);
+//                foreach (var sortedScoresClassName in sortedScoresClassNames)
+//                {
+//                    LogObject(sortedScoresClassName);
+//                }
+//                Console.WriteLine(Divider);
+//
+//
+//
+//                Console.WriteLine("PREDICTED IN: {0} tick(s) and {1} seconds", stopwatch.ElapsedTicks,
+//                    stopwatch.Elapsed.TotalSeconds);
+//                LogObject(prediction.PredictedLabel);
+//            }
         }
     }
 }
