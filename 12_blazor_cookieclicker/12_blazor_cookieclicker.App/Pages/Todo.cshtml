@@ -1,0 +1,24 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using _12_blazor_cookieclicker.App.Models
+@using _12_blazor_cookieclicker.App.Services
+@using System.Collections.Generic;
+@page "/todo"
+@inject TodoService TodoServiceInstance
+
+<h1>Todo</h1>
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>
+            <input type="checkbox" bind="@todo.IsDone" />
+            <input bind="@todo.Name" />
+        </li>
+    }
+</ul>
+<input placeholder="Something todo" bind="@newTodo" />
+
+@functions {
+    string newTodo;
+    List<Models.Todo> todos = TodoServiceInstance.GetAll();
+}
+

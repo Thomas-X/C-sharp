@@ -10,6 +10,11 @@ namespace _10_ws_webserver
 {
     class Program
     {
+
+        /// <summary>
+        /// Setup topshelf configuration (windows service)
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             HostFactory.Run(hostConfig =>

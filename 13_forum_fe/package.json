@@ -1,0 +1,33 @@
+{
+  "name": "13_forum_fe",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "final-form": "^4.12.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-final-form": "^4.1.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-spring": "^8.0.18",
+    "styled-components": "^4.2.0",
+    "typography": "^0.16.19",
+    "unstated": "^2.1.1",
+    "unstated-debug": "^0.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

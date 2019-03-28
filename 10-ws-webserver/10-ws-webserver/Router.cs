@@ -6,6 +6,9 @@ using _10_ws_webserver.DataStructures;
 
 namespace _10_ws_webserver
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Router
     {
         private HttpRequest request;

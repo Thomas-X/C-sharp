@@ -20,7 +20,7 @@ namespace _10_ws_webserver
  * [] - Add option to have routes like /about /me etc.
  * [] - Add session handling
  * [] - Support all mimetypes & fix bug where favicon is not loading for some reason
- * 
+ * [] - Asynchronously listen for incoming tcp socket connections (is a requirement of the assignment) 
  *
  *
  */
@@ -28,8 +28,8 @@ namespace _10_ws_webserver
     {
         public string Address { get; }
         public int Port { get; }
-
-        // 10mb max response by default (this is really inefficient with higher loads, TODO)
+        
+        // TODO currently 1mb max receiving size, could be increased, just change the 1 to 5 for 5mb
         public static int ReceivingDataBufferSize { get; private set; } = 1 * 1000000;
 
         private IPAddress localAddress;
@@ -37,6 +37,7 @@ namespace _10_ws_webserver
         private TcpListener listener;
 
         // The amount of backlog threads to keep listening for requests for
+        // The threads to be made, each one listening to the tcp socket.
         private int backlog = 128;
 
 
@@ -46,6 +47,9 @@ namespace _10_ws_webserver
             Port = port;
         }
 
+        /// <summary>
+        /// Start listening on the Berkeley TCP socket interface
+        /// </summary>
         public void StartListening()
         {
             localAddress = IPAddress.Parse(Address);
@@ -54,6 +58,10 @@ namespace _10_ws_webserver
             Console.WriteLine("Ready on port {0}", Port);
         }
 
+        /// <summary>
+        /// Performs a blocking call to listen for incoming connections. Could be improved by asynchronously listening to the tcp socket and calling
+        /// the response logic that way.
+        /// </summary>
         public void TcpClientListener()
         {
             // Perform a blocking call to accept requests.
@@ -96,11 +104,13 @@ namespace _10_ws_webserver
             client.Close();
         }
 
+        /// <summary>
+        /// Starts listener threads based on the backlog attribute, each one being a blocking call till a socket connection is received
+        /// </summary>
         public void WaitForConnections()
         {
             while (true)
             {
-                Console.WriteLine("Refreshed thread pool");
                 // Create TCP listener pool
                 Task[] tasks = new Task[backlog];
 
@@ -112,12 +122,15 @@ namespace _10_ws_webserver
 
                 // Till all tasks have completed (each "task" can handle 1 request, we have a pool of tasks based on the backlog attribute)
                 Task.WaitAll(tasks);
+                Console.WriteLine("Refreshing threads");
             }
 
             // ReSharper disable once FunctionNeverReturns
         }
 
-
+        /// <summary>
+        /// Start listening for incoming connections
+        /// </summary>
         public void Listen()
         {
             try
