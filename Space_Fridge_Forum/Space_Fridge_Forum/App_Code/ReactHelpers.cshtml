@@ -1,0 +1,35 @@
+﻿@using System.Web.Mvc
+@using System.Web.Optimization
+@using Newtonsoft.Json
+@using Space_Fridge_Forum.DataStructures
+@using Space_Fridge_Forum.Enums
+@using Space_Fridge_Forum.Services
+
+@helper RenderComponent(Components component, object state = null)
+{
+var id = shortid.ShortId.Generate(7);
+    ReactComponentRendering.Instance.ReactComponentInstances.Add(new ReactComponentInstance()
+    {
+        AppId = id,
+        Component = component,
+        State = state ?? new {}
+    });
+    <div id="@id"></div>
+    PartialUtil.RequireScript(null, "/Scripts/React/dist/bundle.js", 1);
+}
+
+@helper RenderState(List<ReactComponentInstance> rc)
+{
+    var  obj = new Dictionary<string, object>();
+
+    foreach (var reactComponentInstance in rc)
+    {
+        obj[reactComponentInstance.AppId] = new
+        {
+            Component = reactComponentInstance.Component,
+            state = reactComponentInstance.State,
+        };
+    }
+
+    <script>window.ServerState = JSON.parse(`@(new HtmlString(JsonConvert.SerializeObject(obj)))`)</script>
+}
