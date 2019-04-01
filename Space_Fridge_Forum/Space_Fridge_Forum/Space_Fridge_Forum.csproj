@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1A9DAA10-7005-4C9C-ADAE-B90C2012E1C9}</ProjectGuid>
+    <ProjectGuid>{FB1E1E64-5441-43BF-ABAA-51116214E609}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -123,6 +123,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -136,35 +175,65 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FridgesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TodoController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecipesController.cs" />
     <Compile Include="DataStructures\ReactComponentInstance.cs" />
     <Compile Include="Enums\Components.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.Context.tt</DependentUpon>
+    <Compile Include="Migrations\201904011018599_Refactor_Stuffs.cs" />
+    <Compile Include="Migrations\201904011018599_Refactor_Stuffs.Designer.cs">
+      <DependentUpon>201904011018599_Refactor_Stuffs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
+    <Compile Include="Migrations\201904011020471_Refactor_Id_ToUserid.cs" />
+    <Compile Include="Migrations\201904011020471_Refactor_Id_ToUserid.Designer.cs">
+      <DependentUpon>201904011020471_Refactor_Id_ToUserid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.edmx</DependentUpon>
+    <Compile Include="Migrations\201904011031031_Fix_Fridge.cs" />
+    <Compile Include="Migrations\201904011031031_Fix_Fridge.Designer.cs">
+      <DependentUpon>201904011031031_Fix_Fridge.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Todo.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+    <Compile Include="Migrations\201904011047330_Misc_Refactor.cs" />
+    <Compile Include="Migrations\201904011047330_Misc_Refactor.Designer.cs">
+      <DependentUpon>201904011047330_Misc_Refactor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.cs" />
+    <Compile Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.Designer.cs">
+      <DependentUpon>201904011103371_AddFridgeRelationshipIngredient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904011410238_Change_Ingredient_Relationships.cs" />
+    <Compile Include="Migrations\201904011410238_Change_Ingredient_Relationships.Designer.cs">
+      <DependentUpon>201904011410238_Change_Ingredient_Relationships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904011456588_SeedOnly_1.cs" />
+    <Compile Include="Migrations\201904011456588_SeedOnly_1.Designer.cs">
+      <DependentUpon>201904011456588_SeedOnly_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904011545352_SeedOnly_2.cs" />
+    <Compile Include="Migrations\201904011545352_SeedOnly_2.Designer.cs">
+      <DependentUpon>201904011545352_SeedOnly_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\Fridge.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\IngredientType.cs" />
+    <Compile Include="Models\IngredientUnit.cs" />
+    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\ViewModels\RecipeViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PartialUtil.cs" />
     <Compile Include="Services\ReactComponentRendering.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -174,26 +243,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Database.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Database.edmx.sql" />
-    <Content Include="Models\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database.cs</LastGenOutput>
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Content>
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Database.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Database.edmx.diagram">
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Content>
     <Content Include="App_Code\ReactHelpers.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -217,16 +269,40 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Todo\Create.cshtml" />
-    <Content Include="Views\Todo\Delete.cshtml" />
-    <Content Include="Views\Todo\Details.cshtml" />
-    <Content Include="Views\Todo\Edit.cshtml" />
-    <Content Include="Views\Todo\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Fridges\Details.cshtml" />
+    <Content Include="Views\Fridges\Edit.cshtml" />
+    <Content Include="Views\Fridges\Index.cshtml" />
+    <Content Include="Views\Recipes\Create.cshtml" />
+    <Content Include="Views\Recipes\Delete.cshtml" />
+    <Content Include="Views\Recipes\Details.cshtml" />
+    <Content Include="Views\Recipes\Edit.cshtml" />
+    <Content Include="Views\Recipes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\React\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -244,6 +320,32 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904011018599_Refactor_Stuffs.resx">
+      <DependentUpon>201904011018599_Refactor_Stuffs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011020471_Refactor_Id_ToUserid.resx">
+      <DependentUpon>201904011020471_Refactor_Id_ToUserid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011031031_Fix_Fridge.resx">
+      <DependentUpon>201904011031031_Fix_Fridge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011047330_Misc_Refactor.resx">
+      <DependentUpon>201904011047330_Misc_Refactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.resx">
+      <DependentUpon>201904011103371_AddFridgeRelationshipIngredient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011410238_Change_Ingredient_Relationships.resx">
+      <DependentUpon>201904011410238_Change_Ingredient_Relationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011456588_SeedOnly_1.resx">
+      <DependentUpon>201904011456588_SeedOnly_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011545352_SeedOnly_2.resx">
+      <DependentUpon>201904011545352_SeedOnly_2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -260,9 +362,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55584</DevelopmentServerPort>
+          <DevelopmentServerPort>50611</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55584/</IISUrl>
+          <IISUrl>http://localhost:50611/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
