@@ -18,13 +18,27 @@ namespace Space_Fridge_Forum.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Recipes
-        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(db.Recipes.ToList());
-        }
+            var userId = User.Identity.GetUserId();
+            var recipes = db.Recipes.ToList();
+            var user = db.Users
+                .Where(x => x.Id == userId)
+                .Include(x => x.Fridge)
+                .Include(x=> x.Recipes)
+                .ToList()[0];
+            var mdl = new IndexRecipeViewModel()
+            {
+                FridgeIngredients = user.Fridge.Ingredients,
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Recipes = recipes,
+                User = user,
+            };
 
-        [AllowAnonymous]
+            return View(mdl);
+        }
+        
         // GET: Recipes/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,7 +71,6 @@ namespace Space_Fridge_Forum.Controllers
         public List<Ingredient> GetIngredients()
         {
             var ingredients = new List<Ingredient>();
-            var createIngredientSwitch = false;
             Ingredient currentIngredient = null;
             foreach (var formAllKey in Request.Form.AllKeys)
             {
@@ -74,6 +87,7 @@ namespace Space_Fridge_Forum.Controllers
                         currentIngredient = null;
                         continue;
                     }
+
                     currentIngredient.Value = val;
                 }
 
@@ -89,7 +103,8 @@ namespace Space_Fridge_Forum.Controllers
                     currentIngredient.IngredientUnit = db.IngredientUnits.First(x => x.Id == val);
                 }
 
-                if (currentIngredient.IngredientUnit != null && currentIngredient.IngredientType != null && currentIngredient.Value > 0)
+                if (currentIngredient.IngredientUnit != null && currentIngredient.IngredientType != null &&
+                    currentIngredient.Value > 0)
                 {
                     ingredients.Add(currentIngredient);
                     currentIngredient = null;
@@ -109,16 +124,23 @@ namespace Space_Fridge_Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var vals = Request.Form.AllKeys;
-                var value1 = Request.Form["type-0"];
                 recipe.Ingredients = GetIngredients();
-                recipe.User = db.Users.Find(User.Identity.GetUserId());
+                recipe.User = db.Users.ToList().FirstOrDefault(x => x.Id == User.Identity.GetUserId());
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(recipe);
+            var mdl = new CreateRecipeViewModel()
+            {
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Ingredients = recipe.Ingredients,
+                Description = recipe.Description,
+                People = recipe.People,
+                User = recipe.User
+            };
+            return View(mdl);
         }
 
         // GET: Recipes/Edit/5
@@ -140,7 +162,17 @@ namespace Space_Fridge_Forum.Controllers
                 return HttpNotFound();
             }
 
-            return View(recipe);
+            var mdl = new CreateRecipeViewModel()
+            {
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Ingredients = recipe.Ingredients,
+                Description = recipe.Description,
+                People = recipe.People,
+                User = recipe.User,
+                Name = recipe.Name,
+            };
+            return View(mdl);
         }
 
         // POST: Recipes/Edit/5
@@ -148,22 +180,42 @@ namespace Space_Fridge_Forum.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,People,Description")]
-            Recipe recipe)
+        public ActionResult Edit(int id)
         {
-            if (recipe.User.Id != User.Identity.GetUserId())
-            {
-                return HttpNotFound();
-            }
-
+            var recipe = db.Recipes.Where(x => x.Id == id).Include(x => x.User).Include(x => x.Ingredients).ToList()[0];
             if (ModelState.IsValid)
             {
+                if (recipe.User.Id != User.Identity.GetUserId())
+                {
+                    return HttpNotFound();
+                }
+                recipe.Name = Request.Form["Name"];
+                recipe.People = Convert.ToInt32(Request.Form["People"]);
+                recipe.Description = Request.Form["Description"];
+                db.Entry(recipe).State = EntityState.Modified;
+                db.SaveChanges();
+                
+                recipe.Ingredients = new List<Ingredient>();
+                db.Entry(recipe).State = EntityState.Modified;
+                db.SaveChanges();
+
+                recipe.Ingredients = GetIngredients();
                 db.Entry(recipe).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(recipe);
+            var mdl = new CreateRecipeViewModel()
+            {
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Ingredients = recipe.Ingredients,
+                Description = recipe.Description,
+                People = recipe.People,
+                User = recipe.User,
+                Name = recipe.Name,
+            };
+            return View(mdl);
         }
 
         // GET: Recipes/Delete/5
@@ -198,7 +250,8 @@ namespace Space_Fridge_Forum.Controllers
             {
                 return HttpNotFound();
             }
-
+            // delete related ingredients too
+            db.Ingredients.RemoveRange(recipe.Ingredients);
             db.Recipes.Remove(recipe);
             db.SaveChanges();
             return RedirectToAction("Index");

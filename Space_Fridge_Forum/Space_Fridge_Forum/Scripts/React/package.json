@@ -27,13 +27,16 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      "emotion"
     ]
   },
   "dependencies": {
     "color": "^3.1.0",
+    "emotion": "^10.0.9",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-spinners": "^0.5.3",
     "react-spring": "^8.0.18",
     "styled-components": "^4.2.0",
     "unstated": "^2.1.1",

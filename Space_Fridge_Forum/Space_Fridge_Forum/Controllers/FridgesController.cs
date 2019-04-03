@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Space_Fridge_Forum.Models;
+using Space_Fridge_Forum.Models.ViewModels;
 
 namespace Space_Fridge_Forum.Controllers
 {
@@ -23,7 +24,6 @@ namespace Space_Fridge_Forum.Controllers
             var filterFridges = fridges.ToList().Where(x => x.UserId == User.Identity.GetUserId());
             return View(filterFridges);
         }
-
         // GET: Fridges/Details/5
         public ActionResult Details(string id)
         {
@@ -40,7 +40,18 @@ namespace Space_Fridge_Forum.Controllers
             {
                 return HttpNotFound();
             }
-            return View(fridge);
+
+            var mdl = new EditFridgeViewModel()
+            {
+                HexColor = fridge.HexColor,
+                Ingredients = fridge.Ingredients,
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Name = fridge.Name,
+                User = fridge.User,
+                UserId = fridge.UserId
+            };
+            return View(mdl);
 
         }
         
@@ -61,7 +72,64 @@ namespace Space_Fridge_Forum.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email", fridge.UserId);
-            return View(fridge);
+            var mdl = new EditFridgeViewModel()
+            {
+                HexColor = fridge.HexColor,
+                Ingredients = fridge.Ingredients,
+                IngredientTypes = db.IngredientTypes.ToList(),
+                IngredientUnits = db.IngredientUnits.ToList(),
+                Name = fridge.Name,
+                User = fridge.User,
+                UserId = fridge.UserId
+            };
+            return View(mdl);
+        }
+
+        //TODO DRY (RecipesController.GetIngredients)
+        public List<Ingredient> GetIngredients()
+        {
+            var ingredients = new List<Ingredient>();
+            Ingredient currentIngredient = null;
+            foreach (var formAllKey in Request.Form.AllKeys)
+            {
+                if (currentIngredient == null)
+                {
+                    currentIngredient = new Ingredient();
+                }
+
+                if (currentIngredient.Value == 0 && formAllKey.Contains("ingredientvalue"))
+                {
+                    int.TryParse(Request.Form[formAllKey], out var val);
+                    if (val == 0)
+                    {
+                        currentIngredient = null;
+                        continue;
+                    }
+
+                    currentIngredient.Value = val;
+                }
+
+                if (currentIngredient.IngredientType == null && formAllKey.Contains("type"))
+                {
+                    int.TryParse(Request.Form[formAllKey], out var val);
+                    currentIngredient.IngredientType = db.IngredientTypes.First(x => x.Id == val);
+                }
+
+                if (currentIngredient.IngredientUnit == null && formAllKey.Contains("unit"))
+                {
+                    int.TryParse(Request.Form[formAllKey], out var val);
+                    currentIngredient.IngredientUnit = db.IngredientUnits.First(x => x.Id == val);
+                }
+
+                if (currentIngredient.IngredientUnit != null && currentIngredient.IngredientType != null &&
+                    currentIngredient.Value > 0)
+                {
+                    ingredients.Add(currentIngredient);
+                    currentIngredient = null;
+                }
+            }
+
+            return ingredients;
         }
 
         // POST: Fridges/Edit/5
@@ -69,16 +137,29 @@ namespace Space_Fridge_Forum.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,Name,HexColor")] Fridge fridge)
+        [ActionName("Edit")]
+        public ActionResult Edit_Post(string id)
         {
+            var fridge = db.Fridges.Where(x => x.UserId == id).Include(x => x.User).Include(x => x.Ingredients).ToList()[0];
             if (fridge.UserId != User.Identity.GetUserId())
             {
                 return HttpNotFound();
             }
             if (ModelState.IsValid)
             {
+                fridge.HexColor = Request.Form["HexColor"];
+                fridge.Name = Request.Form["Name"];
                 db.Entry(fridge).State = EntityState.Modified;
                 db.SaveChanges();
+
+                fridge.Ingredients = new List<Ingredient>();
+                db.Entry(fridge).State = EntityState.Modified;
+                db.SaveChanges();
+
+                fridge.Ingredients = GetIngredients();
+                db.Entry(fridge).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email", fridge.UserId);

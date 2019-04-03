@@ -188,37 +188,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904011018599_Refactor_Stuffs.cs" />
-    <Compile Include="Migrations\201904011018599_Refactor_Stuffs.Designer.cs">
-      <DependentUpon>201904011018599_Refactor_Stuffs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011020471_Refactor_Id_ToUserid.cs" />
-    <Compile Include="Migrations\201904011020471_Refactor_Id_ToUserid.Designer.cs">
-      <DependentUpon>201904011020471_Refactor_Id_ToUserid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011031031_Fix_Fridge.cs" />
-    <Compile Include="Migrations\201904011031031_Fix_Fridge.Designer.cs">
-      <DependentUpon>201904011031031_Fix_Fridge.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011047330_Misc_Refactor.cs" />
-    <Compile Include="Migrations\201904011047330_Misc_Refactor.Designer.cs">
-      <DependentUpon>201904011047330_Misc_Refactor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.cs" />
-    <Compile Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.Designer.cs">
-      <DependentUpon>201904011103371_AddFridgeRelationshipIngredient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011410238_Change_Ingredient_Relationships.cs" />
-    <Compile Include="Migrations\201904011410238_Change_Ingredient_Relationships.Designer.cs">
-      <DependentUpon>201904011410238_Change_Ingredient_Relationships.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011456588_SeedOnly_1.cs" />
-    <Compile Include="Migrations\201904011456588_SeedOnly_1.Designer.cs">
-      <DependentUpon>201904011456588_SeedOnly_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011545352_SeedOnly_2.cs" />
-    <Compile Include="Migrations\201904011545352_SeedOnly_2.Designer.cs">
-      <DependentUpon>201904011545352_SeedOnly_2.cs</DependentUpon>
+    <Compile Include="Migrations\201904022022512_Clean.cs" />
+    <Compile Include="Migrations\201904022022512_Clean.Designer.cs">
+      <DependentUpon>201904022022512_Clean.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
@@ -227,10 +199,12 @@
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\IngredientType.cs" />
     <Compile Include="Models\IngredientUnit.cs" />
+    <Compile Include="Models\ViewModels\FridgeViewModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\ViewModels\RecipeViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HtmlStringHack.cs" />
     <Compile Include="Services\PartialUtil.cs" />
     <Compile Include="Services\ReactComponentRendering.cs" />
     <Compile Include="Startup.cs" />
@@ -269,8 +243,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -321,29 +293,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904011018599_Refactor_Stuffs.resx">
-      <DependentUpon>201904011018599_Refactor_Stuffs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011020471_Refactor_Id_ToUserid.resx">
-      <DependentUpon>201904011020471_Refactor_Id_ToUserid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011031031_Fix_Fridge.resx">
-      <DependentUpon>201904011031031_Fix_Fridge.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011047330_Misc_Refactor.resx">
-      <DependentUpon>201904011047330_Misc_Refactor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011103371_AddFridgeRelationshipIngredient.resx">
-      <DependentUpon>201904011103371_AddFridgeRelationshipIngredient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011410238_Change_Ingredient_Relationships.resx">
-      <DependentUpon>201904011410238_Change_Ingredient_Relationships.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011456588_SeedOnly_1.resx">
-      <DependentUpon>201904011456588_SeedOnly_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011545352_SeedOnly_2.resx">
-      <DependentUpon>201904011545352_SeedOnly_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904022022512_Clean.resx">
+      <DependentUpon>201904022022512_Clean.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

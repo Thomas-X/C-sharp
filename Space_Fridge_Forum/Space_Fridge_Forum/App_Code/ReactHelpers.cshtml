@@ -1,5 +1,6 @@
 ﻿@using System.Web.Mvc
 @using System.Web.Optimization
+@using Microsoft.Ajax.Utilities
 @using Newtonsoft.Json
 @using Space_Fridge_Forum.DataStructures
 @using Space_Fridge_Forum.Enums
@@ -12,7 +13,7 @@
     {
         AppId = id,
         Component = component,
-        State = state ?? new { }
+        State = state ?? new {}
     });
     <div id="@id"></div>
     PartialUtil.RequireScript(null, "/Scripts/React/dist/bundle.js", 1);
@@ -32,6 +33,16 @@
     }
     if (obj.Count > 0)
     {
-        <script>window.ServerState = JSON.parse(`@(new HtmlString(JsonConvert.SerializeObject(obj)))`)</script>
+        var settings = new JsonSerializerSettings()
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        };
+        var str = HttpUtility.JavaScriptStringEncode(JsonConvert.SerializeObject(obj, Formatting.None, settings));
+
+        var data = new HtmlStringHack(str);
+
+        <script>
+            window.ServerState = JSON.parse(`@data`)
+        </script>
     }
 }

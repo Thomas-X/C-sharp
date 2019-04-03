@@ -4,6 +4,8 @@ import Image from "../ASPComponents/Image";
 import HomeHero from "../ASPComponents/HomeHero";
 import Fridge from "../ASPComponents/Fridge";
 import IngredientItemManager from "../ASPComponents/IngredientItemManager";
+import RecipeIndex from "../ASPComponents/RecipeIndex";
+
 
 // These values should matchup with the enum in ASP
 export default [
@@ -12,4 +14,5 @@ export default [
     new ASPComponent(3, HomeHero),
     new ASPComponent(4, Fridge),
     new ASPComponent(5, IngredientItemManager),
+    new ASPComponent(6, RecipeIndex),
 ];

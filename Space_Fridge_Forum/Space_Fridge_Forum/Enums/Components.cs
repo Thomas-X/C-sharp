@@ -7,6 +7,7 @@
         HomeHero = 3,
         Fridge = 4,
         IngredientItemManager = 5,
+        RecipeIndex = 6,
         SomeComponentThatDoesntExist=923892,
     }
 }

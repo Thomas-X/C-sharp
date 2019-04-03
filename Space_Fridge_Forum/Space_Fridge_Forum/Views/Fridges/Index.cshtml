@@ -2,10 +2,10 @@
 @model IEnumerable<Space_Fridge_Forum.Models.Fridge>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Fridge(s)";
 }
 
-<h2>Index</h2>
+<h2>Your fridge(s)</h2>
 <table class="table">
     <tr>
         <th>
@@ -19,26 +19,26 @@
         </th>
         <th></th>
     </tr>
-        @foreach (var item in Model) {
-            @ReactHelpers.RenderComponent(Components.Fridge, new
-            {
-                color = item.HexColor,
-            })
+    @foreach (var item in Model)
+    {
+        @ReactHelpers.RenderComponent(Components.Fridge, new
+        {
+            color = item.HexColor,
+        })
         <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HexColor)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HexColor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.UserId}) |
+                @Html.ActionLink("Details", "Details", new {id = item.UserId})
+            </td>
+        </tr>
+    }
 </table>

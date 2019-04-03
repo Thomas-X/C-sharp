@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -40,6 +41,20 @@ namespace Space_Fridge_Forum.Services
         {
             public string Path { get; set; }
             public int Priority { get; set; }
+        }
+
+        public static IEnumerable<string> SplitBy(this string str, int chunkLength)
+        {
+            if (String.IsNullOrEmpty(str)) throw new ArgumentException();
+            if (chunkLength < 1) throw new ArgumentException();
+
+            for (int i = 0; i < str.Length; i += chunkLength)
+            {
+                if (chunkLength + i > str.Length)
+                    chunkLength = str.Length - i;
+
+                yield return str.Substring(i, chunkLength);
+            }
         }
     }
 }

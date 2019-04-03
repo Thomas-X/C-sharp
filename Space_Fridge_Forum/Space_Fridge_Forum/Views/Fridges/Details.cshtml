@@ -33,7 +33,23 @@
         <dd>
             @Html.DisplayFor(model => model.HexColor)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </dt>
+        <dd>
+            @if (Model.Ingredients.Count == 0)
+            {
+            <p>
+                No ingredients added yet, @Html.ActionLink("edit", "Edit", new { id = Model.UserId }) your fridge to add ingredients that are currently in your fridge you awesome astronaut!
+            </p>
+            }
+            @foreach (var item in Model.Ingredients)
+            {
+                <p>
+                    @item.IngredientType.Type&thinsp;@item.Value@item.IngredientUnit.Unit
+                </p>
+            }
+        </dd>
     </dl>
 </div>
 <p>

@@ -128,6 +128,8 @@ namespace Space_Fridge_Forum.Migrations
 
             context.IngredientTypes.AddOrUpdate(x => x.Id, _ingredientTypes.ToArray());
 
+            context.SaveChanges();
+
             // https://i.pinimg.com/564x/46/66/9d/46669d8dfef675c0b6bcf7bd66ab448f.jpg
         }
     }
