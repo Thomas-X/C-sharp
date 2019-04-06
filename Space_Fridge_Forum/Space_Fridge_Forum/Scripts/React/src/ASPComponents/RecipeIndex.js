@@ -28,6 +28,8 @@ class RecipeIndex extends Component {
     recipeIngredientsMatchFridge = (recipe) => {
         let pass = false;
         const passedItems = [];
+
+
         for (const recipeIngredient of recipe.Ingredients) {
             for (const fridgeIngredient of this.props.FridgeIngredients) {
                 const percentile = fridgeIngredient.Value * 0.25;
